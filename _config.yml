@@ -1,12 +1,12 @@
 # Basic
-title: 潘柏信
-subtitle: 个人站
+title: Aimee
+subtitle: personal blog
 description: 欢迎来到我的个人站~
 # 头像里面的标题
-avatarTitle: leopardpan
+avatarTitle: Aimee
 # 头像里面的描述
-avatarDesc: iOS / 机器学习
-url: "http://baixin.io"
+avatarDesc: node / javascript 
+url: "/"
 
 # Comment
 comment:
@@ -16,33 +16,25 @@ comment:
 
 # Social
 social:
-    weibo: 5366874726 
-    github: leopardpan
-    # zhihu: panpanleopard
-    # juejin: xxx
-    jianshu: 2ada30d8d0f7
+    qq: 2725068747 
+    github: duanpingbi
     # twitter: 
-    mail: leopardpan@icloud.com
+    mail: 2725068747@qq.com
 
 
 # 百度统计 
 # 使用博客模板请去掉或者更换 id 
 baidu:
-    id: xxxx  
+    id: 95a1b80081ef53a605e918ea258b58f0 
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
-ga:
-    id: xxxx  
-    host: auto  
+# ga:
+#     id: xxxx  
+#     host: auto  
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
-#
-#
-#  _post/ 下的文章更换成你自己的文章
-#  帮忙star一下，感谢~😆 地址： https://github.com/leopardpan/leopardpan.github.io
-#
 #
 # 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
 
