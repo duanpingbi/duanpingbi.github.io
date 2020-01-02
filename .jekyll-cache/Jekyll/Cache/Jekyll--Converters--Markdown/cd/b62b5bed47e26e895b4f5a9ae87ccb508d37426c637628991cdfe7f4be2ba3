@@ -1,5 +1,0 @@
-I"�<p>#信号量
-    .抽象数据类型：
-    -&gt;P(): sem减1，if sem &lt; 0 waiting , else continue
-    -&gt;V(): sem加1，if sem &lt;= 0 唤醒一个等待的P</p>
-:ET
