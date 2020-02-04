@@ -1,0 +1,92 @@
+I"<ul>
+  <li>NumPy
+    <ul>
+      <li><a href="https://www.numpy.org.cn/">Numpy</a> 系统是 Python 的一种开源的数组计算扩展，是一个用 python 实现的科学计算包。包括：</li>
+      <li>1）一个具有矢量算术运算和复杂广播能力的快速且节省空间的多维数组，称为 ndaaray(N-dimensional array object)</li>
+      <li>
+        <ol>
+          <li>用于对于数组数据进行快速运算的标准数学函数， ufunc(universal function object)</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>用于整合 c/c++和 Fortran 代码的工具包</li>
+        </ol>
+      </li>
+      <li>4）实用的线性代数、傅立叶变换和随机数生成函数，numpy 和稀疏矩阵运算包 scipy 配合使用更加方便。</li>
+    </ul>
+  </li>
+  <li>建立 Ndarray 多维数组</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    np.array(
+        [
+            [
+            [1,2,3,4],
+            [2,3,4,5],
+        ],
+        [
+            [1,2,3,4],
+            [2,3,4,5],
+        ]
+        ]
+    )
+</code></pre></div></div>
+<ul>
+  <li>ndarray的常见创建方式
+    <ul>
+      <li>array函数：接受一个普通的python序列，转成ndarray</li>
+      <li>zeros函数：创建指定长度或形状的全零数组</li>
+      <li>ones函数：创建指定长度或形状的全1的数组</li>
+      <li>empty函数：创建一个没有任何具体值的数组（准确地说是一些未初始化的垃圾值）</li>
+      <li>arrange函数：类似于python的range函数，通过指定开始值、终值和元素个数来创建一维数组，可以通过endpoint关键字指定是否包括终值、缺省设置是包括终值</li>
+      <li>logspace函数：和linespace类似，不过它创建等比数列</li>
+      <li>使用随机数填充数组，即使用numpy.random模块的random()函数，数组所包含的元素数量由参数决定</li>
+      <li>random函数：生成随机数，numpy.random.random((2,3,4),dtype=numpy.int),生成每一位随机数的方法：numpy.random.random_sample();</li>
+    </ul>
+  </li>
+  <li>numpy中的数据类型
+    <ul>
+      <li>创建NumPy数组时可以通过dtype属性显式指定数据类型，如果不指定，NumPy会自己推断出合适的数据类型，所以一般无需显式指定</li>
+      <li>astype方法，可以转换数组的元素数据类型，得到一个新数组</li>
+      <li>reshape:改变array形状，形状可变，总数不变，得到的是原数组的一个视图</li>
+    </ul>
+  </li>
+  <li>NumPy基本操作
+    <ul>
+      <li>数组与标量、数组之间的运算
+        <ul>
+          <li>数组不用循环即可对每个元素执行批量运算，这通常就叫矢量化，即用数组表达式代替循环的做法</li>
+          <li>矢量化数组运算性能要比纯python方式快上一两个数量级</li>
+          <li>大小相等的数组之间的任何算术运算都会将运算应用到元素级</li>
+        </ul>
+      </li>
+      <li>元素级运算
+        <ul>
+          <li>加、减、乘、除、幂运算等都可以用于数组与标量、大小行等数组之间</li>
+          <li>在NumPy中，大小相等的数组之间运算，为元素级运算，即只用于位置相同的元素之间，所得到的运算结果组成一个新的数组，运算结果的位置跟操作数位置相同</li>
+        </ul>
+      </li>
+      <li>transpace函数用于数组转置</li>
+      <li>通用函数：快速的元素级数组函数
+        <ul>
+          <li>ufunc: 一种对ndarray中的数据执行元素级运算的函数，也可以看作是简单函数（接受一个或多个标量值，并产生一个或多个标量值）的矢量化包装器</li>
+        </ul>
+      </li>
+      <li>numpy.where(表达式数组，为true的数组，为false的数组)实现数据的过滤操作，是三元表达式x if condition else y的矢量化版本</li>
+      <li>numpy.unique 取出数组的非重复值</li>
+      <li>数组数据文件的读写：
+        <ul>
+          <li>将数组以二进制格式保存到磁盘
+            <ul>
+              <li>numpy.save() 写    numpy.load()读</li>
+            </ul>
+          </li>
+          <li>存取文本文件</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+:ET

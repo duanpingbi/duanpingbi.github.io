@@ -1,0 +1,55 @@
+I"F<h1 id="信号量">信号量</h1>
+<ul>
+  <li>抽象数据类型:
+    <ul>
+      <li>P(): sem减1，if sem &lt; 0 waiting , else continue</li>
+      <li>V(): sem加1，if sem &lt;= 0 唤醒一个等待的P</li>
+    </ul>
+  </li>
+  <li>信号量是正数，被保护的变量
+    <ul>
+      <li>初始化完成之后，唯一能够改变一个信号量的值的办法是通过P()和V()</li>
+      <li>操作必须是原子的，P()能够被阻塞，而V()不会阻塞</li>
+    </ul>
+  </li>
+  <li>什么是管程
+    <ul>
+      <li>一个锁：指定临界区</li>
+      <li>0或者多个条件变量： 等待/通知信号量用于管理并发访问共享数据</li>
+    </ul>
+  </li>
+  <li>一般方法：
+    <ul>
+      <li>收集在对象/模块中的相关共享数据</li>
+      <li>定义方法来访问共享数据</li>
+    </ul>
+  </li>
+  <li>lock
+    <ul>
+      <li>Lock::Acquire() - 等待直到锁可用，然后抢占锁</li>
+      <li>Look::Release() - 释放锁，唤醒等待者如果有</li>
+    </ul>
+  </li>
+  <li>Condition Variable
+    <ul>
+      <li>允许处于等待状态进入临界区
+        <ul>
+          <li>允许处于等待（睡眠）的线程进入临界区</li>
+          <li>某个时刻原子释放锁进入睡眠</li>
+        </ul>
+      </li>
+      <li>Wait() operation
+        <ul>
+          <li>释放锁，睡眠，重新获得锁返回后</li>
+        </ul>
+      </li>
+      <li>Signal() operation (or broadcast() operation)
+        <ul>
+          <li>唤醒等待者（或者所有等待者），如果有</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+:ET

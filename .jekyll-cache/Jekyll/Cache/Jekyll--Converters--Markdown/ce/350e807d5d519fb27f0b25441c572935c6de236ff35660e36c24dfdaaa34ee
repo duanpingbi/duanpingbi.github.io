@@ -1,0 +1,21 @@
+I"W<ul>
+  <li>NumPy
+    <ul>
+      <li><a href="https://www.numpy.org.cn/">Numpy</a> 系统是 Python 的一种开源的数组计算扩展，是一个用 python 实现的科学计算包。包括：</li>
+      <li>1）一个具有矢量算术运算和复杂广播能力的快速且节省空间的多维数组，称为 ndaaray(N-dimensional array object)</li>
+      <li>
+        <ol>
+          <li>用于对于数组数据进行快速运算的标准数学函数， ufunc(universal function object)</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>用于整合 c/c++和 Fortran 代码的工具包</li>
+        </ol>
+      </li>
+      <li>4）实用的线性代数、傅立叶变换和随机数生成函数，numpy 和稀疏矩阵运算包 scipy 配合使用更加方便。</li>
+    </ul>
+  </li>
+  <li>建立 Ndarray 多维数组</li>
+</ul>
+:ET

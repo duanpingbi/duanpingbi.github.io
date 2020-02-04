@@ -1,0 +1,42 @@
+I"�<ul>
+  <li>
+    <p>定义：数组是在程序设计中，为了处理方便，把具有相同类型的若干元素按有序的形式组织起来的一种形式。抽象地讲，数组即是有限个类型相同的元素的有序序列。若将此序列命名，那么这个名称即为数组名。组成数组的各个变量称为数组的分量，也称为数组的元素。而用于区分数组的各个元素的数字编号则被称为下标，若为此定义一个变量，即为下标变量</p>
+  </li>
+  <li><a href="https://leetcode-cn.com/problems/3sum-closest/">题目16</a>
+    <ul>
+      <li>描述： 给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
+  例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</li>
+    </ul>
+  </li>
+  <li>解题思路：先排序，再遍历，然后使用内部双指针，有点二分法的思想，时间复杂度为O(n^2),因为两层循环</li>
+  <li>代码：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function sortBy(a,b){
+  return a-b;
+}
+var threeSumClosest = function (nums, target) {
+  nums.sort(sortBy);
+  console.log(nums);
+  let threeSum = nums[0] + nums[1] + nums[2];
+  for (let i = 0; i &lt; nums.length - 2; i++) {
+      let low = i+1;
+      let high = nums.length - 1;
+      while(low &lt; high) {
+          let sum = nums[i] + nums[low] + nums[high];
+          if(Math.abs(sum - target) &lt; Math.abs(threeSum - target)) {
+               threeSum = sum;
+          }
+          if(sum &lt; target ){
+              low++;
+          } else if( sum &gt; target) {
+              high--;
+          } else {
+              return target;
+          }
+      }
+  }
+  return threeSum;
+};
+</code></pre></div>    </div>
+  </li>
+</ul>
+:ET
