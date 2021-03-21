@@ -1,4 +1,4 @@
-I"�<ul>
+I"9<ul>
   <li>NumPy
     <ul>
       <li><a href="https://www.numpy.org.cn/">Numpy</a> 系统是 Python 的一种开源的数组计算扩展，是一个用 python 实现的科学计算包。包括：</li>
@@ -114,6 +114,7 @@
               <li>通过二维数组创建DataFrame</li>
               <li>通过字典的方式创建DataFrame</li>
               <li>索引对象</li>
+              <li>NumPy中的数组运算，在Series中都保留使用，并且Series进行数组运算时，索引与值之间的映射关系不会改变</li>
             </ul>
           </li>
         </ul>

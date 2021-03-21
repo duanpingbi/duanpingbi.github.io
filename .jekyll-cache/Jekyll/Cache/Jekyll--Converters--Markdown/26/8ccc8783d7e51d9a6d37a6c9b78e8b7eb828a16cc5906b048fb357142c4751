@@ -1,4 +1,4 @@
-I"A<ul>
+I"J<ul>
   <li>NumPy
     <ul>
       <li><a href="https://www.numpy.org.cn/">Numpy</a> 系统是 Python 的一种开源的数组计算扩展，是一个用 python 实现的科学计算包。包括：</li>
@@ -95,7 +95,48 @@
       </li>
     </ul>
   </li>
-  <li><a href="https://pandas.pydata.org/">pandas</a></li>
+  <li><a href="https://pandas.pydata.org/">pandas</a>
+    <ul>
+      <li>pandas数据结构
+        <ul>
+          <li>Series:一种类似于一维数组的对象，它是由一组数据（各种numpy数据类型）以及一组与之相关的数据标签（即索引）组成，仅由一组数据即可产生简单的series
+            <ul>
+              <li>通过一维数组创建Series</li>
+              <li>通过字典的方式创建Series</li>
+              <li>Series应用numpy数组运算</li>
+              <li>Series缺失值检测</li>
+              <li>Series自动对齐</li>
+              <li>Series及其索引的name属性</li>
+            </ul>
+          </li>
+          <li>DataFrame:一个表格的数据结构，含有一组有序的列，每列可以是不同的值类型（数值、字符串、布尔值等），DataFrame即有行索引也有列索引，可以被看作是由series组成的字典
+            <ul>
+              <li>通过二维数组创建DataFrame</li>
+              <li>通过字典的方式创建DataFrame</li>
+              <li>索引对象</li>
+              <li>NumPy中的数组运算，在Series中都保留使用，并且Series进行数组运算时，索引与值之间的映射关系不会改变</li>
+              <li>pandas中的isnull和notnull函数可用于Series缺失值检测
+                <ul>
+                  <li>isnull和notnull都返回一个布尔类型的Series</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://matplotlib.org/">matplotlib</a>
+    <ul>
+      <li>python最著名的绘图库，它提供了一整套和matlab相似的命令api，十分合适交互式地进行制图</li>
+    </ul>
+  </li>
+  <li>机器学习
+    <ul>
+      <li>定义：机器学习是一门从数据中研究算法的科学学科，直白来讲，是根据已有的数据，进行算法选择，并基于算法和数据构建模型，最终对于未来进行预测</li>
+      <li>机器学习是人工智能的一个分支，我们使用计算机设计一个系统，使它能够根据提供的训练数据按照一定的方式来学习，随着训练次数的增加，该系统可以在性能上不断学习和改进，通过参数优化的学习模型，能够用于预测相关问题的输出。</li>
+    </ul>
+  </li>
 </ul>
 
 :ET

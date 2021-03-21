@@ -1,4 +1,4 @@
-I"�<ul>
+I"<ul>
   <li>NumPy
     <ul>
       <li><a href="https://www.numpy.org.cn/">Numpy</a> 系统是 Python 的一种开源的数组计算扩展，是一个用 python 实现的科学计算包。包括：</li>
@@ -114,10 +114,32 @@
               <li>通过二维数组创建DataFrame</li>
               <li>通过字典的方式创建DataFrame</li>
               <li>索引对象</li>
+              <li>NumPy中的数组运算，在Series中都保留使用，并且Series进行数组运算时，索引与值之间的映射关系不会改变</li>
+              <li>pandas中的isnull和notnull函数可用于Series缺失值检测
+                <ul>
+                  <li>isnull和notnull都返回一个布尔类型的Series</li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
       </li>
+    </ul>
+  </li>
+  <li><a href="https://matplotlib.org/">matplotlib</a>
+    <ul>
+      <li>python最著名的绘图库，它提供了一整套和matlab相似的命令api，十分合适交互式地进行制图</li>
+    </ul>
+  </li>
+  <li>机器学习
+    <ul>
+      <li>定义：机器学习是一门从数据中研究算法的科学学科，直白来讲，是根据已有的数据，进行算法选择，并基于算法和数据构建模型，最终对于未来进行预测</li>
+      <li>机器学习是人工智能的一个分支，我们使用计算机设计一个系统，使它能够根据提供的训练数据按照一定的方式来学习，随着训练次数的增加，该系统可以在性能上不断学习和改进，通过参数优化的学习模型，能够用于预测相关问题的输出</li>
+      <li>拟合：构建的算法符合给定数据的特征</li>
+      <li>鲁棒性：也就是健壮性、稳健性、强健性，是系统的健壮性；当存在异常数据的时候，算法也会拟合数据</li>
+      <li>过拟合：算法太符合样本数据的特征，对于实际生成中的数据特征无法拟合</li>
+      <li>欠拟合：算法不太符合样本的数据特征</li>
+      <li><a href="">scikit-learn</a></li>
     </ul>
   </li>
 </ul>
