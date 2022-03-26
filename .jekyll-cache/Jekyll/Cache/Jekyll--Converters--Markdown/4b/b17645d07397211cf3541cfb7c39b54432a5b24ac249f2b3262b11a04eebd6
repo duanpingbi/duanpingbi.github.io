@@ -1,0 +1,90 @@
+I"�<h2 id="浏览器的事件循环机制">浏览器的事件循环机制？</h2>
+
+<ul>
+  <li>event loop</li>
+  <li>宏任务：
+    <ul>
+      <li>代码块、setTimeout、 setInterval I/O操作</li>
+    </ul>
+  </li>
+  <li>微任务
+    <ul>
+      <li>new Promise().then()</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="为什么要引入微任务只有宏任务可以吗">为什么要引入微任务，只有宏任务可以吗？</h3>
+<ul>
+  <li>宏任务，先进先出的原则执行，对于高优先级的任务就无法处理了</li>
+</ul>
+
+<h3 id="node-中的事件循环和浏览器中的事件循环有什么区别">node 中的事件循环和浏览器中的事件循环有什么区别？</h3>
+<ul>
+  <li>宏任务的执行顺序：
+    <ul>
+      <li>timers定时器，执行已经安排的setTimeout和set
+  interval的回调函数</li>
+      <li>pending callback 待定回调：执行延迟到下一个循环迭代的I/O循环</li>
+      <li>idle, prepare：进系统内部使用</li>
+      <li>poll：检索新的I/O事件，执行与I/O相关的回调</li>
+      <li>check: 执行setImmediate() 回调函数</li>
+      <li>close callback: 关闭socket回调函数执行</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="微任务和宏任务在node执行顺序">微任务和宏任务在node执行顺序</h3>
+<p>与node版本有关</p>
+
+<p>node v10 及以前：</p>
+<ul>
+  <li>1.执行完一个阶段中的所有任务</li>
+  <li>2.执行nextTick队列里的内容</li>
+  <li>3.执行完微任务队列的内容</li>
+</ul>
+
+<p>node v10以后版本，根浏览器执行顺序一致</p>
+
+<h2 id="事件的捕获和冒泡机制是什么">事件的捕获和冒泡机制是什么？</h2>
+<ul>
+  <li>捕获：是从window到目标元素</li>
+  <li>冒泡：是从目标元素到window</li>
+</ul>
+
+<h3 id="windowaddevnetlistener监听的是什么阶段的事件">window.addEvnetListener监听的是什么阶段的事件？</h3>
+<ul>
+  <li>默认是冒泡，取决于最后一个参数。默认是false,代码冒泡，如果是true代表是捕获阶段</li>
+</ul>
+
+<h3 id="平常有哪些场景用到这个机制">平常有哪些场景用到这个机制？</h3>
+<ul>
+  <li>事件委托</li>
+</ul>
+
+<h3 id="了解promise吗平时用的多吗">了解Promise吗？平时用的多吗？</h3>
+
+<h3 id="promiseall-你知道有什么特性吗">promise.all 你知道有什么特性吗？</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">PromiseAll</span><span class="p">(</span><span class="nx">promiseArray</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">promiseArray</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">传入的值不是一个数组</span><span class="dl">'</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">promiseArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">promiseArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">then</span><span class="p">(</span><span class="nx">val</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+                <span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">counter</span> <span class="o">===</span> <span class="nx">len</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">reslove</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET

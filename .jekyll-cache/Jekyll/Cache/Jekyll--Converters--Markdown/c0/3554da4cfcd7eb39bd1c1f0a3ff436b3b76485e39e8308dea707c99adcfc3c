@@ -1,0 +1,186 @@
+I"/*<h2 id="react-fiber">react fiber</h2>
+<ul>
+  <li>fiber 架构目的
+    <ul>
+      <li>为了使react渲染的过程中可以被中断，将控制权交还给浏览器，可以让位给高优先级的任务，浏览器空闲之后再恢复渲染，对于计算量比较大的js计算或者dom计算，不会显得卡顿，有规律的执行任务</li>
+    </ul>
+  </li>
+  <li>generator 有类型中断的功能，为什么不直接使用
+    <ul>
+      <li>要使用generator ，需要将所有代码包装成generator的形式</li>
+      <li>generator  内部是要有状态</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="如何判断当前是否有高优先级任务">如何判断当前是否有高优先级任务？</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> - 约定一个合理的执行时间，当超过这个执行时间，如果任务还没结束，中断当前任务，将控制权交还给浏览器
+ 时间计算 1000ms/60f = 16ms
+ requestIdleCallback 使浏览器在有空的时候执行我们的回调，这个回调传入一个参数，表示浏览器有多少时间供我们执行任务
+
+ - 浏览器在一帧内要做什么事情
+   - 处理用户输入事件
+   - js执行
+   - requestAimations 调用
+   - 布局 layout
+   - 绘制 paint
+</code></pre></div></div>
+
+<h2 id="浏览器很忙的时候怎么办">浏览器很忙的时候怎么办？</h2>
+<ul>
+  <li>
+    <p>requestIdleCallback timeout 参数，如果超过这个timeout后，回调还没被执行，那么会在下一帧强制执行回调</p>
+  </li>
+  <li>兼容性？？？
+    <ul>
+      <li>requestIdleCallback 兼容性很差，通过messageChannel 模拟实现了requestIdleCallback的功能</li>
+    </ul>
+  </li>
+  <li>timeout超时一定会执行吗？？？
+    <ul>
+      <li>
+        <p>不是的，react 里预定了5个优先级的等级</p>
+      </li>
+      <li>Immediate 最高优先级，这个优先级的任务应该被马上执行不能中断</li>
+      <li>userBlocking 这些任务一般是用户交互的结果，需要及时得到反馈</li>
+      <li>normal 不需要用户立即感受到的变化，比如网络请求</li>
+      <li>low 这些任务可以延后，但是最终也需要执行</li>
+      <li>idle 可以被无限延期的</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="高阶组件什么是高阶组件高阶组件用来做什么">高阶组件？什么是高阶组件？高阶组件用来做什么？</h2>
+<ul>
+  <li>hoc
+    <ul>
+      <li>一个函数</li>
+      <li>入参： 原来的react组件</li>
+      <li>返回值： 新的react组件</li>
+      <li>纯函数，不应该有任何的副作用</li>
+    </ul>
+  </li>
+  <li>做什么？</li>
+  <li>属性代理
+    <ul>
+      <li>操作props</li>
+      <li>操作组件实例</li>
+    </ul>
+  </li>
+  <li>劫持/继承</li>
+</ul>
+
+<h2 id="什么是react-hook-有啥优势">什么是react hook ？有啥优势？</h2>
+<ul>
+  <li>可以不写class组件的情况下，使用state和其他react 特性</li>
+</ul>
+
+<p>useState
+useEffect
+useMemo</p>
+
+<ul>
+  <li>class 组件的缺点
+    <ul>
+      <li>组件间的状态逻辑很难复用
+        <ul>
+          <li>
+            <p>组件间如果有state的逻辑是相似的， class 模式下基本是用高阶组件来解决，虽然能够解决问题，但是我们需要在组件外部包一层元素，会导致层级非常冗余</p>
+          </li>
+          <li>
+            <p>复杂业务的状态组件会非常复杂，不好拆分</p>
+          </li>
+          <li>
+            <p>监听和定时器的操作，被分散在多个区域（多个生命周期函数中）</p>
+          </li>
+          <li>
+            <p>this 指向问题</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="hooks-的优点">hooks 的优点</h2>
+<ul>
+  <li>利于业务逻辑的封装和拆分，可以非常自由的组合各种自定义hooks（自己封装react hooks的公共逻辑）</li>
+  <li>可以在无需修改组件结构的情况下，复用组件状态逻辑</li>
+  <li>定时器 监听。。。都被聚合到同一个代码下</li>
+</ul>
+
+<p>### react hook 的注意事项</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>只能在函数内部的最外层调用hook,不要在循环、条件判断或者子函数中调用</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>只能在react 的函数组件中调用hook,不要在其他的js函数里调用</li>
+    </ol>
+  </li>
+</ul>
+
+<p>#### 为什么hook 不能在循环、条件判断中调用？</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>手动实现useState</li>
+    </ol>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="c1">// 使用 hook</span>
+    <span class="kd">function</span> <span class="nx">Counter</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 实现 useState</span>
+    <span class="kd">let</span> <span class="nx">stateArray</span><span class="p">:</span> <span class="nx">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">initialState</span><span class="p">:</span> <span class="nx">T</span><span class="p">):[</span><span class="nx">T</span><span class="p">,</span> <span class="p">(</span><span class="nx">newState</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">]</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+      <span class="nx">stateArray</span><span class="p">[</span><span class="nx">current</span><span class="p">]</span> <span class="o">=</span> <span class="nx">stateArray</span><span class="p">[</span><span class="nx">current</span><span class="p">]</span> <span class="o">||</span> <span class="nx">initialState</span><span class="p">;</span>
+      <span class="kd">function</span> <span class="nx">setState</span><span class="p">(</span><span class="nx">newState</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">stateArray</span><span class="p">[</span><span class="nx">current</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newState</span><span class="p">;</span>
+        <span class="nx">render</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="nx">index</span><span class="o">++</span><span class="p">;</span>
+
+      <span class="k">return</span> <span class="p">[</span><span class="nx">stateArray</span><span class="p">[</span><span class="nx">current</span><span class="p">],</span> <span class="nx">setState</span><span class="p">];</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>#### 为什么useEffect 的第二个参数是空数组，就相当于componentDidMount只执行一次？</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">allDeps</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">any</span><span class="p">[]</span> <span class="o">|</span> <span class="kc">undefined</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// 二维数组</span>
+<span class="kd">let</span> <span class="nx">cursor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="kd">function</span> <span class="nx">useEffect</span><span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">viod</span><span class="p">,</span> <span class="nx">depArray</span><span class="p">?:</span> <span class="nx">any</span><span class="p">[])</span> <span class="p">{</span>
+   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">depArray</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">callback</span><span class="p">();</span>
+     <span class="nx">allDeps</span><span class="p">[</span><span class="nx">cursor</span><span class="p">]</span> <span class="o">=</span> <span class="nx">depArray</span><span class="p">;</span>
+     <span class="nx">cursor</span><span class="o">++</span><span class="p">;</span>
+     <span class="k">return</span><span class="p">;</span>
+   <span class="p">}</span>
+    <span class="c1">// 表示的是上一次的依赖项</span>
+   <span class="kd">const</span> <span class="nx">deps</span> <span class="o">=</span> <span class="nx">allDeps</span><span class="p">[</span><span class="nx">cursor</span><span class="p">];</span>
+  <span class="c1">// 依赖项是否更新</span>
+   <span class="kd">const</span> <span class="nx">hasChanged</span> <span class="o">=</span> <span class="nx">deps</span> <span class="p">?</span> <span class="nx">depArray</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">el</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">el</span> <span class="o">!==</span> <span class="nx">deps</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">:</span> <span class="kc">true</span><span class="p">;</span>
+
+   <span class="k">if</span><span class="p">(</span><span class="nx">hasChanged</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">callback</span><span class="p">();</span>
+     <span class="nx">allDeps</span><span class="p">[</span><span class="nx">cursor</span><span class="p">]</span> <span class="o">=</span> <span class="nx">depArray</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="nx">cursor</span><span class="o">++</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+
+<p>#### 自定义的hook怎样操作组件的？</p>
+
+:ET

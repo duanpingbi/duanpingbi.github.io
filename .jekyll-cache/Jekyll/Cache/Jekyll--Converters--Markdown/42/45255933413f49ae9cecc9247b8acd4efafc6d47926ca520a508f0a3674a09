@@ -1,0 +1,104 @@
+I"o%<h2 id="用settimeout-实现setinterval">用setTimeout 实现setInterval</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">mockSetInterval</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">recurFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">atgs</span><span class="p">);</span>
+            <span class="nx">recurFn</span><span class="p">();</span>
+        <span class="p">},</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">recurFn</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">mockClearInterval</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="防抖和节流">防抖和节流</h2>
+
+<h3 id="防抖">防抖</h3>
+<ul>
+  <li>
+    <p>当持续触发事件时，一定时间内没有再触发事件，事件处理函数才会执行一次，如果一定时间内多次触发事件，就会重新开始延时</p>
+  </li>
+  <li>
+    <p>最后一次事件触发后一定时间才会触发</p>
+  </li>
+</ul>
+
+<h4 id="适用场景">适用场景</h4>
+<ul>
+  <li></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">debounce</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">wait</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+            <span class="p">},</span> <span class="nx">wait</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="节流">节流</h3>
+
+<ul>
+  <li>当持续触发事件时，保证一段时间内只调用一次事件处理函数，当持续触发scroll事件的时候，每隔一定时间才会执行一次事件处理函数</li>
+</ul>
+
+<h4 id="适用场景-1">适用场景</h4>
+<ul>
+  <li></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// 时间戳，首节流，第一次立即执行，但是停止之后，没法再次执行</span>
+    <span class="kd">function</span> <span class="nx">throttle</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">interval</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">last</span> <span class="o">&gt;=</span>  <span class="nx">interval</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+                <span class="nx">last</span> <span class="o">=</span> <span class="nx">now</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// setTimeout  实现，尾节流，第一次不会立即执行，最后一次还会执行</span>
+    <span class="kd">function</span> <span class="nx">throttle</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">wait</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+                    <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                <span class="p">})</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 结合</span>
+    <span class="kd">function</span> <span class="nx">throttle</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">wait</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+            <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">last</span> <span class="o">&gt;=</span> <span class="nx">wait</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+                <span class="nx">last</span> <span class="o">=</span> <span class="nx">now</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+                <span class="p">},</span> <span class="nx">wait</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+:ET

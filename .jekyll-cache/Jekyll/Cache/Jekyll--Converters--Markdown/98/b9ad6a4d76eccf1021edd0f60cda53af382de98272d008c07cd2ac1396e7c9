@@ -1,0 +1,15 @@
+I"]<h2 id="react-fiber">react fiber</h2>
+<ul>
+  <li>fiber 架构目的
+    <ul>
+      <li>为了使react渲染的过程中可以被中断，将控制权交还给浏览器，可以让位给高优先级的任务，浏览器空闲之后再恢复渲染，对于计算量比较大的js计算或者dom计算，不会显得卡顿，有规律的执行任务</li>
+    </ul>
+  </li>
+  <li>generator 有类型中断的功能，为什么不直接使用
+    <ul>
+      <li>要使用generator ，需要将所有代码包装成generator的形式</li>
+      <li>generator  内部是要有状态</li>
+    </ul>
+  </li>
+</ul>
+:ET

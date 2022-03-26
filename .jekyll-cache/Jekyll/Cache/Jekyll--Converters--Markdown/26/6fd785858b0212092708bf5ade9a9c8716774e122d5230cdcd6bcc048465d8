@@ -1,0 +1,116 @@
+I"�<ul>
+  <li>1.写一个 mySetInterVal(fn, a, b),每次间隔 a,a+b,a+2b 的时间，
+ 然后写一个 myClear，停止上面的 mySetInterVal</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function mySetInterVal(fn, a, b) {
+    this.time = 0;
+    let timer;
+    this.start = () =&gt; {
+        timer = setInterval(() =&gt; {
+            fn();
+            this.time ++;
+            console.log('a+ this.time * b', a+ this.time * b);
+        }, a+ this.time * b)
+    };
+    this.clear = () =&gt; {
+        this.time = 0;
+        clearInterval(timer);
+    };
+}
+
+const timer = new mySetInterVal(()=&gt; console.log(1111), 1000, 1000);
+timer.start();
+setTimeout(() =&gt; {
+    timer.clear(); 
+}, 4000);
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>合并二维有序数组成一维有序数组，归并排序的思路
+```
+function mergeArr(arr) {
+  if(arr.length &lt; 1) {
+      return [];
+  }
+  let mergedArr = arr[0];
+  const merge = function(arrA, arrB) {
+      const res = [];
+      while(arrA.length &amp;&amp; arrB.length) {
+          if(arrA[0] &lt; arrB[0]) {
+              res.push(arrA.shift());
+          } else {
+              res.push(arrB.shift());
+          }
+      }
+      return res.concat(arrA).concat(arrB);
+  };</p>
+
+    <p>for(let i = 1;i&lt;arr.length;i++) {
+      mergedArr = merge(mergedArr, arr[i]);
+  }</p>
+
+    <p>return mergedArr;
+}</p>
+  </li>
+</ul>
+
+<p>const test =  mergeArr([[1,2,6,7], [3,4,8,9], [2,4,10,14]]);
+console.log(‘test’, test);</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- 斐波那契数列
+- F(0) = 0;
+- F(1) = 1;
+- F(n) = F(n - 1) + F(n - 2);
+  - 递归版本
+</code></pre></div></div>
+<p>function fib(n) {
+    if(n &lt; 0) {
+        throw Error(<code class="highlighter-rouge">n不能小于0</code>);
+    }
+    if(n &lt;= 1) {
+        return n;
+    }</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return fib(n-1) + fib(n-2); } ```  - 数组实现  ```  function fib1 (n) {
+if(n &lt; 0) {
+    throw Error('n不能小于0');
+}
+
+if(n &lt; 2) {
+    return n;
+}
+let f0 = 0;
+let f1 = 1;
+for(let i = 1; i&lt;n;i++) {
+    [f0, f1] = [f1, f0+f1];
+}
+return f1; }
+</code></pre></div></div>
+
+<p>console.log(‘fib’, fib1(8), fib(8));</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ - 字符串出现的不重复最长长度
+ - 利用滑动窗口思想，有重复的字符，更新左边边界值
+</code></pre></div></div>
+<p>function lengthOflongest(str) {
+    if(str.length &lt;=0) {
+        return 0;
+    }
+    let j = -1;
+    let res = 0;
+    let map = new Map();
+    for(let i =0;i&lt;str.length;i++) {
+        if(map.has(str[i])) {
+            j = Math.max(j, map.get(str[i]));
+        }
+        res = Math.max(res, i - j);
+        map.set(str[i], i);
+    }
+    return res;
+}</p>
+
+<p>console.log(‘lengthOfLongestSubstring’, lengthOflongest(‘abcdaefa’));
+```</p>
+
+:ET

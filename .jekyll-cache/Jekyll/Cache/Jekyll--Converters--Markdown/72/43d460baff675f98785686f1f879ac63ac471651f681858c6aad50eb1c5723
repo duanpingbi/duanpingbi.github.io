@@ -1,0 +1,12 @@
+I"�<ul>
+  <li>react项目中有哪些细节可以优化？实际开发中做过哪些优化？</li>
+  <li>分包，减少资源加快首屏打开的速度</li>
+  <li>由于react是父级props改变之后，所有于props不相关子组件在没有条件控制的情况下，也会触发render渲染，这是没有必要的，可以结合react的pureComponent以及React.memo等做浅比较</li>
+  <li>最后就是保证整个应用的可用性，为组件创建错误边界，可以使用componentDidCatch来处理</li>
+  <li>保证数据的不可变性</li>
+  <li>使用唯一的键值迭代</li>
+  <li>使用web worker 做密集型的任务处理</li>
+  <li>不在render中处理数据</li>
+  <li>不必要的标签用React.Fragments</li>
+</ul>
+:ET

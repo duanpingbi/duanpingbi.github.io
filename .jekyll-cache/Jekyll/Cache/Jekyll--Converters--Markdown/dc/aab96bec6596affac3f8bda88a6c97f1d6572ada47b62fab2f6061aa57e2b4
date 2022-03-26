@@ -1,0 +1,12 @@
+I"�<ul>
+  <li>移动端适配方案
+    <ul>
+      <li>1.media queries</li>
+      <li>2.flex布局</li>
+      <li>3.rem + viewport</li>
+      <li>4.vh vm</li>
+      <li>5.百分比</li>
+    </ul>
+  </li>
+</ul>
+:ET

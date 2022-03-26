@@ -1,0 +1,11 @@
+I"5<h2 id="用settimeout-实现setinterval">用setTimeout 实现setInterval</h2>
+<p>```js
+let timer = null;
+function mockSetInterval(fn, delay, …args) {
+    const recurFn = function() {
+        timer = setTimeout(() =&gt; {
+            fn.apply(this, atgs);
+            recurFn();
+        }, delay);
+    }</p>
+:ET
