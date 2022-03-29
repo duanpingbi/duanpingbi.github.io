@@ -1,0 +1,25 @@
+I"=<h3 id="为什么要使用typescript">为什么要使用typescript</h3>
+<p>javascript 是一门动态弱类型的语言，对变量的类型十分宽容，而且不会在这些变量和他们的调用者之间建立契约，对javascript类型进行静态检查</p>
+
+<ul>
+  <li>typescript 更像是一门工具而不是一门语言，
+    <ul>
+      <li>
+        <ol>
+          <li>类型检查，typescript会在编译时进行严格的静态类型检查，这意味着可以在编码的阶段发现可能存在的隐患</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>语言扩展</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>工具属性，typescript 可以编译成标准的javascript 可以在任何浏览器和操作系统</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

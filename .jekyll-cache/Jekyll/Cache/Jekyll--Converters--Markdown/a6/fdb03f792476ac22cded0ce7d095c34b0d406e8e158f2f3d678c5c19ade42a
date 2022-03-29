@@ -1,0 +1,4 @@
+I"
+<h3 id="为什么要使用typescript">为什么要使用typescript</h3>
+<p>javascript 是一门动态弱类型的语言，对变量的类型十分宽容，而且不会在这些变量和他们的调用者之间建立契约，对javascript类型进行静态检查</p>
+:ET
