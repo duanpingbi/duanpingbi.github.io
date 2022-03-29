@@ -1,0 +1,403 @@
+I"*X<h2 id="页面的重绘和重排">页面的重绘和重排</h2>
+
+<h3 id="浏览器的运行机制">浏览器的运行机制</h3>
+<ul>
+  <li>
+    <ol>
+      <li>html被html解析器解析成DOM树</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li></li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="基础内容">基础内容</h3>
+<p>##基础问答记录：</p>
+
+<p>-1、-0、0、1，代表：不了解、知道一点、理解、完全理解</p>
+
+<h2 id="position几种取值什么意思">position,几种取值，什么意思</h2>
+<ul>
+  <li>Static: 正常文档流定位，此时top right bottom left 	和z-index 属性都无效，块级元素从上往下排布，行级元素从左至右排列</li>
+  <li>Relative：相对定位，相对正常文档流的位置</li>
+  <li>Absolute：相对于最近的非static定位的祖先元素的偏移来确定元素的位置</li>
+  <li>Fixed：指定元素相对于屏幕视口的位置来指定元素的位置，元素的位置在屏幕滚动时不会改变</li>
+  <li>Sticky：粘性定位，特性近似于relative和fixed的合体</li>
+</ul>
+
+<h2 id="怎么实现垂直水平居中">怎么实现垂直水平居中?</h2>
+<ul>
+  <li>1.Flex</li>
+  <li>2.绝对定位居中
+ .absolute-center {
+Position: absolute;
+Margin: auto;
+Left: 0;
+Right: 0;
+Top:0 ;
+Bottom: 0;
+}</li>
+  <li>
+    <ol>
+      <li>Top: 50%; margin-top: -height/2;  left: 50%; margin-left: -width/2;或者margin替换为 transform: translate(-50%, -50%);</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="v-if跟v-show有什么区别-或者visibility-hidden和display-none-有什么不同">v-if跟v-show有什么区别 或者（visibility: hidden和display: none 有什么不同）</h3>
+<p>V-if   DOM节点不存在， v-show dom节点还存在</p>
+
+<h3 id="基础类型有哪些">基础类型有哪些</h3>
+<p>Null   undefined boolean number string symbol bigInt</p>
+
+<p>// typeof有哪些取值. Null -&gt; ‘object’.  function() {} -&gt; ‘function’</p>
+
+<h3 id="call-applybind区别">call 、apply、bind区别</h3>
+<p>1.都是用来改变this的指向
+2.apply call 立即执行， bind返回一个函数，需要时再调用执行</p>
+
+<h3 id="箭头函数跟普通函数的区别">箭头函数跟普通函数的区别</h3>
+<ul>
+  <li>
+    <ol>
+      <li>箭头函数是匿名函数，不能作为构造函数，不能使用new</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>箭头函数不绑定arguments, 可以用rest参数解决</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>this的作用域不同，箭头函数不绑定this，会捕获其上下文this值，作为自己的this值</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>箭头函数没有原型属性</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>箭头函数不能当作generator函数，不能使用yield关键字</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="es6有哪些常用的语法">Es6有哪些常用的语法</h3>
+
+<h3 id="let跟var有啥区别">let跟var有啥区别</h3>
+<ul>
+  <li>
+    <ol>
+      <li>let 可以声明块级作用域的变量</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>let 没有变量提升，存在暂时性死区，不能重复声明</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="http响应值状态码">http响应值//状态码</h3>
+<p>100 — 继续
+101 —  切换协议
+200 —  请求成功
+201 — 已创建
+202 — 已接受
+203 — 非授权信息
+204 — 无内容
+205 — 重置内容
+206 — 部分内容
+300 — 多种选择
+301 — 永久移动
+302 — 临时移动
+304 — 未修改，使用缓存
+305 — 使用代理
+400 — 客服端存在语法错误
+401 — 发送的请求需要有认证信息
+403 — 请求被拒绝
+404 — 找不到资源
+500 — 服务端错误
+503 — 服务器正在维护，无法处理请求</p>
+
+<h3 id="什么是cdn有啥用slb有了解吗有啥用">什么是cdn，有啥用，slb有了解吗，有啥用</h3>
+<ul>
+  <li>https://juejin.cn/post/6913704568325046279</li>
+  <li>内容分发网路，加快用户访问网络资源速度和稳定性，减轻服务器访问压力
+    <h4 id="优势">优势：</h4>
+  </li>
+  <li>
+    <ol>
+      <li>解决跨运营商和跨地域访问问题，降低访问延时</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>大部分请求在CDN边缘节点完成，CDN起到了分流作用，减轻了源站的负载</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>保障网站安全，CDN的负载均衡和分布式存储技术，可以加强网站的可靠性</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>异地备援，当某个服务器发生意外故障，系统将会调用其他临近的健康服务器节点进行服务，进而提供接近100%的可靠性，可以让网站做到永不宕机</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>节约成本：能克服网站分布不均的问题，不用考虑购买服务器与后续的托管运维，服务器之间镜像同步，降低网站自身建设和维护成本</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>更加专注业务本身，提供一站式服务，不仅限于CDN，还有配套的云存储、大数据服务、视频云服务
+        <h3 id="slb">slb：</h3>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>负载均衡 — 将用户的请求分发到集群不同的机器上
+实现：在DNS中为多个地址配置同一个名字，因而查询这个名字的客户机将得到其中一个地址，从而使得不同的客户访问不同的服务器，达到负载均衡的目的</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>地址转换网关负载均衡 支持负载均衡的地址转换网关，可以将一个外部IP地址映射为多个内部IP地址，对每次TCP连接请求动态使用其中一个内部地址，达到负载均衡的目的</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>代理服务器负载均衡 使用代理服务器，可以将请求转发给内部的服务器，使用这种加速模式显然可以提升静态网页的访问速度。然而，也可以考虑这样一种技术，使用代理服务器将请求均匀转发给多台服务器，从而达到负载均衡的目的
+分类：本地负载均衡—针对本地范围的服务器群做负载均衡，
+全局负载均衡：针对不同地理位置、不同网络结构服务器群做负载均衡，主要解决全球拥有只需要一个域名和IP地址就能访问到离自己距离最近的服务器获得最快的访问速度</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="vue--兄弟组件通信这个不会问生命周期">vue  兄弟组件通信（这个不会，问生命周期）</h3>
+<ul>
+  <li>
+    <ol>
+      <li>props/$emit 
+父组件A通过通过props的方式向子组件B传递，B to A通过在B组件中$emit，A组件中v-on的方式实现</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>$emit / $on通过一个空的vue实例作为中央事件总线呢（事件中心），用它来触发事件和监听事件，巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级。当项目比较大时，可以选择更好的状态管理解决方案vuex</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>VuexVuex实现了一个单向数据流，在全局拥有一个State存放数据，当组件要更改State中的数据时，必须通过Mutation进行，Mutation同时提供了订阅者模式供外部插件调用获取State数据的更新，而当所有异步操作（调用后端接口）或批量的同步操作需要走Action，但Action也是无法直接修改State的，还是需要通过Mutation来修改State的数据，最后，根据State的变化渲染到视图上</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>$attrs /$listenners$attrs: 包含了父作用域中不被prop所识别的特性绑定，当一个组件没有声明任何prop时，这里会包含所有父作用域的绑定，并且可以通过v-bind=“$attrs”传入内部组件，通常配合inheriAttrs选项一起使用$listeners: 包含了父作用域的（不包含.native修饰器的） v-on事件监听器，可以通过v-on=“$listeners”传入内部组件</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Provide / inject主要解决了跨越组件间的通信问题，不过它的使用场景主要是子组件获取上级组件的状态，跨级组件间建立了一种提供与依赖注入的关系</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>$parent / $children 与refref: 如果在普通的DOM元素上使用，引用指向的就是DOM元素，如果用在子组件上，引用就指向组件实例$parent / $children： 访问父/子实例
+Vuex会不会用
+Vue components: vue 组件，负责接收用户操作等交互行为，执行dispatch方法触发对应action进行回应
+Dispatch: 操作行为触发方法，是唯一能执行action的方法
+Actions: 操作行为处理模块，由组件中的$store.dispatch(‘action名称’, data)来触发，然后由commit()来触发mutaion的调用，间接更新state，负责处理due componets接收到的所有交互行为，包含异步/同步操作，支持多个同名方法，按照注册的顺序依次触发，向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作，该模块提供了Promise的封装，以支持action的链式触发
+Commit: 状态改变提交操作方法，对mutaion进行提交，是唯一能执行mutations的方法
+Mutations: 状态改变操作方法，由actions中的commit(‘mutaions名称’)来触发，是vuex修改state的唯一推荐方法，该方法只能进行同步操作，且方法只能全局唯一，操作之中会有你一些hook暴露出来，以进行state的监控等
+State: 页面状态管理容器对象，集中存储vue components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示的所需数据从该对象中进行读取，利用vue细粒度数据响应机制来进行高效的状态更新
+Getters: state对象读取方法</li>
+    </ol>
+  </li>
+</ul>
+
+<p>简述下webpack原理、流程</p>
+
+<p>进阶问题：（如果觉得能力还行，就择机多问点）</p>
+
+<h3 id="new语法糖怎么实现">New语法糖怎么实现</h3>
+<p>实现思路：</p>
+<ul>
+  <li>
+    <ol>
+      <li>创建一个对象</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>拿到构造函数</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>将实例的__proto__指向构造函数的原型上</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>执行函数，返回结果
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Function</span> <span class="nx">newObj</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="kd">constructor</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">shift</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+  <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="kd">constructor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="kd">constructor</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">arguments</span><span class="p">);</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">res</span> <span class="o">===</span> <span class="err">‘</span><span class="nx">object</span><span class="err">’</span> <span class="p">?</span> <span class="nx">Res</span> <span class="o">||</span> <span class="nx">obj</span><span class="p">:</span>  <span class="nx">obj</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<p>宏任务、微任务、Js事件循环
+宏任务：整体代码script、
+setTimeout 
+setInterval<br />
+setImmediate
+I/O操作
+微任务：原生Promise
+ process.nextTick
+ Object.observe 
+MutationObserver</p>
+
+<p>https://juejin.cn/post/6844904050543034376
+https://juejin.cn/post/6844904050543034376#heading-20</p>
+
+<h3 id="http响应值304什么意思">http响应值304什么意思?</h3>
+<p>浏览器缓存：
+强缓存、协商缓存
+缓存的位置：service worker \memory cache \disk cache\ push cache</p>
+
+<h3 id="强缓存访问url不会向服务器发送请求直接使用缓存">强缓存：访问url不会向服务器发送请求，直接使用缓存，</h3>
+<p>1.expires: 值为时间戳，返回的是请求结果到期的时间，再次发送请求，如果没有超过到期时间，直接使用该缓存。缺点：根据本地时间进行判读是否过期，本地时间是可以修改的</p>
+<ol>
+  <li>Cache-control: 优先级更高，取值： 2.1 public: 资源客服端和服务器端都可以缓存2.2:privite: 资源只有客户端可以缓存2.3:客户端缓存资源，但是是否缓存需要经过协商缓存来验证2.4:no-store: 不缓存2.5: max-age: 缓存时间（相对时间）缓存位置：强缓存一般放在memery cache 和disk cache ,存储图像和网页资源一般放在disk cache ，操作系统缓存文件一般缓存在memery cache</li>
+  <li>协商缓存：last-modified / if-modified-sincelast-modified 服务器响应请求时，返回该资源在服务器最后被修改的时间，if-modified-since 是客户端再次发起请求时，携带上一次返回的last-modified值，服务器接收到请求后，会根据is-modified—since的值跟该资源在服务器最后被修改的值进行对比，如果服务器最后修改的时间大于last-modified-since,则重新返回资源，返回200，否则返回304，表示资源无修改ETag/ if-none-match ETag是服务器响应请求时返回当前资源文件的一个唯一标识if-none-match是客户端再次发起请求时，携带上次请求返回的唯一标识，过程与last-modified一致ETag/if-none-match 优先级高于last-modified/ if-modified-since ,两者同时存在只有ETag生效，使用协商缓存时，服务器需要考虑负载均衡问题，因此多个服务器的资源的last-modified应该保存一致，因为每一个服务器上的ETag值都不一样，因此考虑负载均衡时，最好不要设置ETag值</li>
+</ol>
+
+<h3 id="https加密过程">https加密过程</h3>
+
+<h3 id="http2">Http2</h3>
+<p>https://juejin.cn/post/6844903667569541133#heading-55
+优势：</p>
+<ul>
+  <li>
+    <ol>
+      <li>二进制分帧层：帧是最小的传输的单位，以二进制传输代替原本的文本传输，原本的报文消息被划分为更小的数据帧
+2.多路复用：在一个TCP连接上，我们可以向对方不断发送帧，每帧的stream identifier 的标明这一帧属于哪个流，然后在对方接收时，根据stream identifier 拼接每一个流的所有帧组成一整块数据，把HTTP/1.1每个请求都当做一个流，那么多个请求变成多个流，请求响应数据分成多个帧，不同流中的帧交错的发送给对方，这就是HTTP/2 中的多路复用</li>
+    </ol>
+  </li>
+  <li>
+    <p>流的概念实现了单连接上多请求-响应并行，解决了线头阻塞的问题，减少了TCP连接数量和TCP连接慢启动造成的问题
+所以http2对于同一域名只需要创建一个链接，而不是像http/1.1那样创建多个连接</p>
+  </li>
+  <li>
+    <ol>
+      <li>服务端推送：浏览器发送一个请求，服务器主动向浏览器推送与这个请求相关的资源，这样浏览器就不用发起后续请求</li>
+    </ol>
+  </li>
+  <li>
+    <p>Server-push 主要针对资源内联做出优化，相较与http/1.1资源内联的优化：客户端可以缓存推送的资源，客户端可以拒收推送过来的资源，推送资源可以由不同页面共享，服务器可以按照优先级推送资源</p>
+  </li>
+  <li>
+    <ol>
+      <li>header压缩：使用HPACK算法来压缩首部内容</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>应用层的重置连接：对于HTTP/1来说，是通过设置tcp segment里的reset flag来通知对端关闭连接的，这种方式会直接断开连接，下次再发起请求就必须重新建立连接，HTTP/2引入RES_STREAM类型的fram,可以在不断开连接的前提下取消某个request的stream。表现更好</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>请求优先级设置：HTTP/2里的每个stream都可以设置依赖和权重，可以按依赖树分配优先级，解决了关键请求被阻塞的问题</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>流量控制：每个http2流都拥有自己的公示的流量窗口，它可以限制另一端发送数据，对于每一个流来说，两端都必须告诉对方自己还有足够的空间来处理新的数据，而在该窗口被扩大前，另一端只被允许发送这么多数据</li>
+    </ol>
+  </li>
+  <li>http/1 的几种优化可以弃用：合并文件、内联资源、雪碧图、域名分片对于HTTP/2来说是不必要的，使用h2尽可能将资源戏粒化，文件分解的尽可能散，不用担心请求数多</li>
+</ul>
+
+<h3 id="vue自定义指令写过没自定义指令可以实现哪些功能">Vue自定义指令写过没，自定义指令可以实现哪些功能</h3>
+<p>Vue 指令是可以写在DOM元素的最小指令，以v-为前缀，vue就能识别这是一个指令并保持语法的一致性，如果你需要对HTML底层操作，这种方式就非常有用</p>
+
+<h3 id="钩子函数">钩子函数：</h3>
+<ul>
+  <li>
+    <ol>
+      <li>bind: 只调用一次，指令第一次绑定到元素调用，在这里可以进行一次性的初始化设置，</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>insertd: 被绑定元素插入父节点时调用
+3.update: 所在组件的VNode更新时调用，但是可能发生在其子节点VNode更新之前，指令的值可能发生改变也可能没有，但是你可以根据比较前后的值来忽略不必要的模版更新
+4，componentUpdated: 指令所在组件的VNode及其子VNode全部更新之后调用
+5.unbind: 只调用一次，指令与元素解绑时调用</li>
+    </ol>
+  </li>
+</ul>
+
+<p>自动获取焦点、一键copy</p>
+
+<p>虚拟 dom是什么，优势、劣势
+1.virtual dom 是对dom的抽象，本质是javascript对象，这个对象就是更加轻量级的对DOM的描述
+优势：前端性能优化的一个秘诀是尽量减少操作DOM，不仅仅是因为操作DOM慢，更因为频繁操作变动DOM会造成浏览器的回流和重绘，使用virtual dom可以在patch过程中尽可能的一次性将差异更新到DOM中，这样保证了DOM不会出现性能很差的时候
+Virtual Dom最大的优势在于抽象了原本的渲染过程实现了跨平台的能力，而不仅仅局限于浏览器的DOM，可以是安卓和ios的原生组件，小程序或者各种GUI</p>
+
+<p>劣势： 无法进行极致优化，虽然虚拟DOM + 合理优化，足以应对绝大数的应用的性能需求；首次渲染大量DOM时，由于多了一层虚拟DOM的计算，会比innerHTML插入慢</p>
+
+<p>继承、原型链</p>
+
+<p>js作用域
+作用域：在运行代码时，代码中的某些特定部分变量，对象，函数的可访问性作用域分为： 全局作用域，函数作用域，块级作用域</p>
+
+<p>chrome有哪些线程
+浏览器包含的进程：
+1.browser进程：主进程，负责浏览器界面显示，与用户交互，页面管理，创建和销毁其他进程，将渲染进程得到的内存中的bitmap，绘制在用户界面，网络资源的管理和下载等
+2。第三方插件进程：每种类型的插件对应一个进程，当使用该插件时才创建
+3.GPU进程：该进程也只有一个，用于3D绘制
+4渲染进程：主要作用为页面渲染，脚本执行，事件处理等，每个Tab页面都有一个渲染进程，互不影响</p>
+
+<p>渲染进程包含的线程：
+1.GUI渲染线程：负责渲染浏览器界面，解析HTML、CSS、构建DOM树和RenderObject树，布局和绘制等，解析html代码转化为浏览器认识的节点，生成DOM树，解析css，生成cssom，把DOM Tree和CSSOM结合，生成Rendering Tree
+GUI渲染线程与js引擎线程互斥，当js引擎执行时GUI线程会被挂起，GUI更新会被保存在一个队列中等到js引擎空闲时立即被执行</p>
+
+<p>Js 引擎线程：js引擎线程就是js内核，负责处理js脚本程序</p>
+
+<p>事件触发线程：用来控制事件循环，并且管理着一个事件队列，当js执行碰到事件绑定和一些异步操作，会走事件触发线程将对应事件添加到对应的线程中，等异步事件有了结果，便把他们的回调操作添加到事件队列，等js引擎线程空闲来处理。当对应的事件符合触发条件被触发时，该线程会把事件添加到待处理队列的队尾，等待js引擎的处理，因为js是单线程，所以这些待处理队列中的事件得排队等待js引擎处理</p>
+
+<p>定时触发器线程：setInterval和setTimeout所在的线程，浏览器定时计数器并不是由js引擎计数的，因为js引擎是单线程的，如果处于阻塞线程状态就会影响到计时的准确，通过单线程来计时并触发定时，这个线程就是定时触发器线程，也叫定时器线程，w3c在HTML标准中规定，规定要求setTimeout中低于4ms的时间间隔算为4ms</p>
+
+<p>异步http请求线程：在XMLHttpRequest 在连接之后是通过浏览器新开一个线程请求，将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放回事件队列中再由js引擎执行，简单说就是当执行到一个http异步请求时，就把异步请求事件添加到异步请求线程，等收到响应再把回调函数添加到事件队列，等待js引擎线程来执行</p>
+
+<p>进程跟线程的区别：
+1.进程是操作系统分配资源的最小单位，线程是程序执行的最小单位
+2.一个进程由一个或者多个线程组成，进程之间相互独立，但是同一进程下的线程共享程序的内存空间及一些进程的资源
+3.线程切换上下文比进程快</p>
+
+<p>lucifer</p>
+
+<p>https://lucifer.ren/fe-interview/</p>
+
+:ET
